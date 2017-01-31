@@ -1,0 +1,53 @@
+		<div class="container" ng-controller="userDetailView">
+			<div class="user-detail-section">
+					<div class="col-md-2 col-xs-4 avatar">
+						<img src="{{owner.avatar}}" class="img-responsive"/>
+					</div>
+					<div class="col-md-10 col-xs-8 user" >
+						<h3>{{owner.name}}</h3>
+						<div class="col-md-12 no-padding">
+							<div class="col-md-3 col-xs-4 no-padding">ID</div>
+							<div class="col-md-9 col-xs-8 no-padding user-id">{{owner.id}}</div>
+						</div>
+						<div class="col-md-12  no-padding">
+							<div class="col-md-3 col-xs-4 no-padding">Login</div>
+							<div class="col-md-9 col-xs-8 no-padding user-login">{{owner.login}}</div>
+						</div>
+						<div class="col-md-12  no-padding">
+							<div class="col-md-3 col-xs-4 no-padding">URL</div>
+							<div class="col-md-9 col-xs-8 no-padding">{{owner.avatar}}</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+			</div>
+			<div id="search-result-detail">
+				<div class="col-md-10 col-xs-12"><br/><h2>Repositories</h2></div>
+				<div class="col-md-2 col-xs-12"><a href="/" class="btn btn-success">Back to Search</a></div>
+
+				<div class="user-detail clearfix" ng-repeat="item in rdata | filter: search">
+					<div class="col-md-12 col-xs-12 user" >
+						<h3>{{item.login}}</h3>
+						<div class="clearfix"></div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-3 col-xs-4 no-padding">Full Name</div>
+							<div class="col-md-9 col-xs-8 user-login no-padding">{{item.full_name}}</div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-3 col-xs-4 no-padding">ID</div>
+							<div class="col-md-9 col-xs-8 user-id no-padding">{{item.id}}</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-3 col-xs-4 no-padding">URL</div>
+							<div class="col-md-9 col-xs-8 no-padding"><a href="{{item.html_url}}">{{item.html_url}}</a></div>
+						</div>
+						<div class="col-md-12 clearfix">
+							<div class="col-md-3 col-xs-4 no-padding">Repo</div>
+							<div class="col-md-9 col-xs-8 no-padding"><a href="{{item.url}}">{{item.url}}</a></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
