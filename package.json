@@ -3,19 +3,28 @@
   "version": "1.0.0",
   "main": "index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "watch": "webpack --watch",
+    "dev": "webpack && npm start"
   },
   "author": "Britta Oblan",
   "license": "ISC",
-  "keywords": [
-    "heroku"
-  ],
   "dependencies": {
-    "ejs": "^2.5.5",
+    "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
+    "bootstrap": "^3.3.7",
     "express": "^4.9.8"
   },
   "engines": {
     "node": "4.1.1"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "jshint": "^2.9.5",
+    "jshint-loader": "^0.8.4",
+    "webpack": "^3.5.2"
+  }
 }

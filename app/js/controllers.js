@@ -1,3 +1,4 @@
+//Initialize NG
 var searchApp = angular.module('searchApp', ['ngRoute']);
 
 searchApp.config(['$routeProvider', function($routeProvider){
@@ -23,17 +24,19 @@ searchApp.config(['$routeProvider', function($routeProvider){
 
   var users;
   $scope.searchIsNotEmpty = false;
-  $scope.searchResult = "";
+  $scope.searchResult = null;
+  $scope.firstLoad = true;
 
   $scope.getUser = function( value ){
+  		$scope.firstLoad = false;
   		users = 'https://api.github.com/search/users?q='+ value; 
-		console.log(users);
+
 
 		if(value.length > 2){
 			$http.get(users).then(function(data) {
 			    $scope.user = data.data.items;
 			    $scope.searchIsNotEmpty = true;
-			    $scope.searchResult = "";
+			    $scope.searchResult = null;
 			});
 
 			//Fire function when reaches 3 letters
@@ -42,20 +45,18 @@ searchApp.config(['$routeProvider', function($routeProvider){
 		}else{
 
 			if( value.length < 3 && value.length > 0 ){
-				$scope.searchIsNotEmpty = true;
+				$scope.searchIsNotEmpty = false;
 				$scope.searchResult = "Please enter username of at least 3 characters." ;
 			}else if( value.length <= 0 ){
 				$scope.searchIsNotEmpty = false ;
 				$scope.searchResult = "Please enter a github user to search!";
 			}
 
-			//Give user a sec
+			//Give user a sec to finish
 			setTimeout( this, 1000 );
 		}
 
-		console.log(value.length);
-
-  }
+  };
 
  //view routes
 }]).controller('userDetailView', ['$scope', '$http','$routeParams', function($scope, $http, $routeParams) {
@@ -72,7 +73,7 @@ searchApp.config(['$routeProvider', function($routeProvider){
 							avatar : data.data.avatar_url,
 							url : data.data.url
 
-		}
+		};
 
 	});
 

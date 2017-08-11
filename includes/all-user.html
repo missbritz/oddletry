@@ -1,15 +1,17 @@
 				<div class="container" ng-controller="searchUser">
 			<form>
 				<div class="col-md-12 col-xs-12"><h1 class="text-center">Search</h1></div>
-				<div class="col-md-12 col-xs-12"><input name="search" id="search-input" class="col-md-12 col-xs-12 form-control text-center" placeholder="Name, ID, URL" ng-model="search"/></div>
+				<div class="col-md-12 col-xs-12"><input name="search" id="search-input" class="col-md-12 col-xs-12 form-control text-center" placeholder="Name, ID, URL" ng-model="search" ng-change="getUser(search)"></div>
+				<div ng-hide="searchIsNotEmpty" class="result-text"><p style="color: #ff0000;" ng-bind="searchResult"></p></div>
 				<div class="clearfix"></div>
 			</form>
 			<div id="search-result-detail">
-				<div class="user-detail" ng-repeat="item in user | filter: search">
-						<div class="col-md-2 col-xs-4 avatar">
-							<img src="{{item.avatar_url}}" class="img-responsive"/>
+				<div ng-show="firstLoad" class="note"><h1>Search GitHub Users!</h1></div>
+				<div class="user-detail" ng-repeat="item in user" ng-hide="!searchIsNotEmpty">
+						<div class="col-md-2 col-xs-4 avatar" ng-show="user.length">
+							<img ng-src="{{item.avatar_url}}" class="img-responsive" ng-show="user.length"/>
 						</div>
-						<div class="col-md-8 col-xs-8 user" >
+						<div class="col-md-8 col-xs-8 user"  ng-show="user.length">
 							<h3>{{item.login}}</h3>
 							<div class="col-md-12 no-padding">
 								<div class="col-md-3 col-xs-6 no-padding">ID</div>
@@ -21,13 +23,13 @@
 							</div>
 							<div class="col-md-12  no-padding">
 								<div class="col-md-3 col-xs-6 no-padding">URL</div>
-								<div class="col-md-3 col-xs-6 no-padding"><a href="{{item.html_url}}">{{item.html_url}}</a>a></div>
+								<div class="col-md-3 col-xs-6 no-padding"><a href="{{item.html_url}}">{{item.html_url}}</a></div>
 							</div>
 						</div>
-						<div class="col-md-2 col-xs-12">
+						<div class="col-md-2 col-xs-12" ng-show="user.length">
 							<a href="#!/user-details/{{item.login}}" class="btn btn-success">View Repositories</a>
 						</div>
-						<div class="clearfix"></div>
+						<div class="clearfix" ng-show="user.length"></div>
 				</div>
 			</div>
 		</div>
